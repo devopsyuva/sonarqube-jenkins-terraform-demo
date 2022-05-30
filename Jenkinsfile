@@ -38,7 +38,7 @@ pipeline {
                 sh 'terraform plan -no-color -o=terrafrom_plan' 
             } 
         }
-        stage(‘archive terrafrom plan output’) {
+        stage('archive terrafrom plan output') {
             archiveArtifacts artifacts: 'terraform_plan', excludes: 'output/*.md', onlyIfSuccessful: true
         }
         stage('Terraform Apply') { 
