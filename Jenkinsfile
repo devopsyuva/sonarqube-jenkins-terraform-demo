@@ -35,7 +35,7 @@ pipeline {
         }
         stage('Terraform Planning') { 
             steps { 
-                sh 'terraform plan -no-color -o=terrafrom_plan' 
+                sh 'terraform plan -no-color -out=terrafrom_plan' 
             } 
         }
         stage('archive terrafrom plan output') {
