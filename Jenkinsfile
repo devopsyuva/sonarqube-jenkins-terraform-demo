@@ -39,7 +39,9 @@ pipeline {
             } 
         }
         stage('archive terrafrom plan output') {
-            archiveArtifacts artifacts: 'terraform_plan', excludes: 'output/*.md', onlyIfSuccessful: true
+            steps {
+                archiveArtifacts artifacts: 'terraform_plan', excludes: 'output/*.md', onlyIfSuccessful: true
+            }
         }
         stage('Terraform Apply') { 
             steps { 
