@@ -5,9 +5,6 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
         SBT_OPTS = "${SBT_OPTS} -Dsbt.color=false"
     }
-    options {
-        ansiColor('xterm')
-    }
     stages { 
         stage('Terraform Initialization') { 
             steps { 
