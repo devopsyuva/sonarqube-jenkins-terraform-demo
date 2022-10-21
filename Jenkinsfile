@@ -26,12 +26,13 @@ pipeline {
         }
         stage('Terraform Planning') { 
             steps { 
-                sh 'terraform plan -no-color -out=terraform_plan' 
+                sh 'terraform plan -no-color -out=terraform_plan'
+                sh 'terraform show -json ./terraform_plan > terraform_plan.json'
             } 
         }
         stage('archive terrafrom plan output') {
             steps {
-                archiveArtifacts artifacts: 'terraform_plan', excludes: 'output/*.md', onlyIfSuccessful: true
+                archiveArtifacts artifacts: 'terraform_plan.json', excludes: 'output/*.md', onlyIfSuccessful: true
             }
         }
         stage('Terraform Apply') { 
@@ -39,10 +40,21 @@ pipeline {
                 sh 'terraform apply -auto-approve'
             } 
         }
+        stage('Run terraform destroy or not?') {
+            steps {
+                script {
+                    env.selected_action = input  message: 'Select action to perform',ok : 'Proceed',id :'tag_id',
+                    parameters:[choice(choices: ['destroy', 'abort'], description: 'Select action', name: 'action')]
+                }
+            }
+        }
         stage('Terraform Destroy') { 
             steps {
-                sh 'sleep 120'
-                sh 'terraform destroy -auto-approve'
+                if (env.selected_action == "destroy") {
+                    sh 'terraform destroy -auto-approve'
+                } else {
+                    sh 'We are not destroying the resource initialted, aborted!!!'
+                }
             } 
         }
     } 
