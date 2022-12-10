@@ -64,7 +64,7 @@ pipeline {
                     if (env.selected_action == "destroy") {
                         sh 'terraform destroy -auto-approve'
                     } else {
-                        sh 'We are not destroying the resource initialted, aborted!!!'
+                        sh 'echo We are not destroying the resource initialted, aborted!!!'
                         sh 'exit 0'
                     }
                 }
