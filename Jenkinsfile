@@ -1,17 +1,13 @@
 pipeline { 
     agent any 
     environment { 
-        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID') 
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY_ID')
-        SBT_OPTS = "${SBT_OPTS} -Dsbt.color=false"
+        AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id') 
+        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
     }
     stages { 
         stage('Terraform Initialization') { 
             steps { 
-                sh 'terraform init' 
-                sh 'pwd' 
-                sh 'ls -al' 
-                sh 'printenv' 
+                sh 'terraform init'
             } 
         } 
         stage('Terraform Format') { 
@@ -27,8 +23,8 @@ pipeline {
         stage('SonarQube Analysis') {
            steps {
                script {
-                   def scannerHome = tool 'SonarQubeScanner';
-                   withSonarQubeEnv('SonarQubeScanner') {
+                   def scannerHome = tool 'SonarScanner';
+                   withSonarQubeEnv('SonarScanner') {
                        sh "${scannerHome}/bin/sonar-scanner"
                    }
                }
