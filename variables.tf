@@ -1,7 +1,7 @@
 variable "inst_type" {
   description = "Multiple instance types"
   type        = list(string)
-  default     = ["t3.micro", "t3.small", "t3.medium"]
+  default     = ["t3.micro", "t3.small", "t2.medium"]
 }
 variable "inst_count" {
   description = "No of EC2 instances to be launched"
