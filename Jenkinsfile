@@ -41,10 +41,23 @@ pipeline {
                 archiveArtifacts artifacts: 'terraform_plan.json', excludes: 'output/*.md', onlyIfSuccessful: true
             }
         }
+        stage('Review and Run terraform apply') {
+            steps {
+                script {
+                    env.selected_action = input  message: 'Select action to perform',ok : 'Proceed',id :'tag_id',
+                    parameters:[choice(choices: ['apply', 'abort'], description: 'Select action', name: 'action')]
+                }
+            }
+        }
         stage('Terraform Apply') { 
-            steps { 
-                sh 'terraform apply -auto-approve'
-            } 
+            steps {
+                if (env.selected_action == 'apply') {
+                    sh 'terraform apply -auto-approve'
+                } else {
+                    sh 'echo Review failed and terraform apply was aborted'
+                    sh 'exit 0'
+                }   
+            }
         }
         stage('Run terraform destroy or not?') {
             steps {
