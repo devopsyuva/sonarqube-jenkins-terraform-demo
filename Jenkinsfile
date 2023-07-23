@@ -51,11 +51,13 @@ pipeline {
         }
         stage('Terraform Apply') { 
             steps {
-                if (env.selected_action == 'apply') {
-                    sh 'terraform apply -auto-approve'
-                } else {
-                    sh 'echo Review failed and terraform apply was aborted'
-                    sh 'exit 0'
+                script {
+                    if (env.selected_action == 'apply') {
+                        sh 'terraform apply -auto-approve'
+                    } else {
+                        sh 'echo Review failed and terraform apply was aborted'
+                        sh 'exit 0'
+                    }
                 }   
             }
         }
