@@ -3,4 +3,3 @@
 - Security Group to allow SSH port in Inbound
 - SonarQube to do Static Code Analysis
 - Destroy the resources
-- Jenkins CICD testing
