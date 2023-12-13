@@ -7,7 +7,7 @@ pipeline {
     stages { 
         stage('Terraform Initialization') { 
             steps { 
-                sh 'terraform init || terraform init -reconfigure'
+                sh 'terraform init || terraform init -upgrade'
             } 
         } 
         stage('Terraform Format') { 
