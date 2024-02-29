@@ -4,3 +4,4 @@
 - SonarQube to do Static Code Analysis
 - Jenkins CI Job to check Demo code
 - Terraform code testing task1
+- Sonarqube Integration with Jenkins Pipeline
