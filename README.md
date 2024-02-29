@@ -3,4 +3,3 @@
 - Security Group to allow SSH port in Inbound
 - SonarQube to do Static Code Analysis
 - Jenkins CI Job to check Demo code
-- Terraform code testing task1
