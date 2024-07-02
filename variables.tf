@@ -36,5 +36,5 @@ variable "az_name" {
 
 variable "keyname" {
   description = "Provide SSH key name"
-  default = "demokey"
+  default = "virginia_sudhams"
 }
