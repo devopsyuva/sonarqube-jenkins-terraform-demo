@@ -4,4 +4,4 @@
 - SonarQube to do Static Code Analysis
 - Jenkins Pipeline
 - Terraform apply and destroy
-- SonarQube Scanner will scan the code and generates a report
+- SonarQube Scanner will scan the code and generates a report to SonarQube Dashboard
